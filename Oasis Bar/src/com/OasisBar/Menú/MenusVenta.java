@@ -109,14 +109,10 @@ public class MenusVenta {
 				System.out.println("Lista de ventas realizadas: ");
 				vV.listar();
 				break;
-			/*case 3:
-				System.out.println("Actualizar datos de insumo: ");
-				vV.actualizar();
-				break;*/
 			case 3:
 				System.out.println("Buscador de compras por cliente");
 				String codigo = ReadTypes.leerCadena(scanner,"Ingrese el NIT del cliente: ");
-				vV.buscar(codigo);
+				vV.listarPcliente(codigo);;
 				break;
 			}
 		}

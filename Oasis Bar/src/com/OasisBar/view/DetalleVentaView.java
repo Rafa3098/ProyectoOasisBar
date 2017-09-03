@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-import com.OasisBar.Menú.MenuDetalle;
+
 import com.OasisBar.control.Conexion;
 import com.OasisBar.control.DetalleRecetaCtrl;
 import com.OasisBar.control.DetalleVentaCtrl;
+import com.OasisBar.control.InsumoCtrl;
 import com.OasisBar.entity.DetalleReceta;
 import com.OasisBar.entity.DetalleVenta;
 import com.OasisBar.entity.Venta;
@@ -22,6 +23,8 @@ public class DetalleVentaView {
 	private DetalleRecetaCtrl detalleRecetaCtrl;
 	private Venta venta;
 	private TragoView Tv;
+	private InsumoCtrl insumoCtrl;
+	private DetalleVentaCtrl detalleventaCtrl;
 	
 	public  DetalleVentaView(Conexion conexion, Scanner scanner) {
 	
@@ -46,18 +49,23 @@ public class DetalleVentaView {
 		 int codigoVenta=venta.getCodigoVenta();
 		 int codigoTrago;
 		 int cantidad;
+		 boolean f;
          TragoView Tv = new TragoView(conexion,scanner);
+         InsumoCtrl ins=new InsumoCtrl(conexion);
 		 Tv.listar();
 		 codigoTrago = ReadTypes.leerEntero(scanner, "Ingrese el codigo de trago: ");
 		 cantidad = ReadTypes.leerEntero(scanner, "Ingrese la cantidad: ");
 		
 		 detalleventa = new DetalleVenta(codigoVenta,codigoTrago,cantidad);
-		
-		 
-		 
 		 
 		try {
+			
+			//if (f==true){
 			detalleVentaCtrl.insert(detalleventa);
+			f= detalleVentaCtrl.StockNecesario(detalleventa);
+			if (f==true){
+			detalleVentaCtrl.StockUpdate(detalleventa);}
+			else {System.out.println("No alcanza");}
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
 		}
@@ -98,7 +106,7 @@ public class DetalleVentaView {
 
 
 	public void actualizar() {
-		int codigoDV;
+		/*int codigoDV;
 		
 		 codigoDV = ReadTypes.leerEntero(scanner, "Ingrese el codigo de detalle de venta a modificar: ");
 		 detalleventa = new DetalleVenta(codigoDV);
@@ -117,11 +125,10 @@ public class DetalleVentaView {
 		}
 	}
 	
-public void stockNecesario(int cantidadStock,int cantidadPedida) {
-		
-		
-		if(cantidadStock>=cantidadPedida){System.out.println("Si alcanza");}
-		else {System.out.println("No alcanza");}
+public void stockNecesario(boolean f) {
+
+		if(f==true){System.out.println("Si alcanza");}
+		else {System.out.println("No alcanza");}*/
 	}
 
 	public DetalleVenta getDetalleVenta() {

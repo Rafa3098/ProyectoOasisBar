@@ -34,14 +34,14 @@ public Trago(String nombre,double cantidadinsumo,String unidadmedida, String nom
 
 }
 
-/*public Trago(String nombre, double precio, String descripcion, String tipo,int cantidadInsumos) {
+public Trago(double precio,String nombre,String descripcion, String tipo,int cantidadInsumos) {
 
 	this.nombre = nombre;
 	this.precio = precio;
 	this.descripcion = descripcion;
 	this.tipo = tipo;
 	this.cantidadInsumos = cantidadInsumos;
-}*/
+}
 
 public Trago(int codigoTrago) {
 

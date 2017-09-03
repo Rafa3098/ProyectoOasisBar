@@ -70,7 +70,7 @@ public class MenuBebida {
 			case 4:
 				System.out.print("Tipo de bebida anterior: ");
 				System.out.println(tragos.getTipo());
-				String tipo = ReadTypes.leerCadena(scanner, "Ingrese el nuevo tipo de bebidae: ");
+				String tipo = ReadTypes.leerCadena(scanner, "Ingrese el nuevo tipo de bebidas: ");
 				tragos.setTipo(tipo);
 				break;
 				

@@ -34,10 +34,11 @@ public class TragoView {
 		
 		nombre = ReadTypes.leerCadena(scanner, "Ingrese el nombre: ");
 		precioUnitario = ReadTypes.leerReal(scanner, "Ingrese el precio unitario: ");
-		descripcion = ReadTypes.leerCadena(scanner, "Ingrese la descripción: ");
+		
+		descripcion = ReadTypes.leerCadena(scanner, "Ingrese la descripcion: ");
 		tipo = ReadTypes.leerCadena(scanner, "Ingrese el tipo: ");
 		cantidadInsumos=ReadTypes.leerEntero(scanner, "Ingrese la cantidad de insumos para la preparacion: ");
-		trago = new Trago(nombre,precioUnitario,descripcion,tipo,cantidadInsumos);
+		trago = new Trago(precioUnitario,nombre,descripcion,tipo,cantidadInsumos);
 		
 		try {
 			tragoCtrl.insert(trago);

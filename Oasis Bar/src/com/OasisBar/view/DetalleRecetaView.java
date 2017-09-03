@@ -2,8 +2,6 @@ package com.OasisBar.view;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import com.OasisBar.Menú.MenuDetalleReceta;
 import com.OasisBar.control.Conexion;
 import com.OasisBar.control.DetalleRecetaCtrl;
 import com.OasisBar.entity.DetalleReceta;
@@ -99,7 +97,7 @@ public class DetalleRecetaView {
 
 
 	public void actualizar() {
-		int codigoDR;
+		/*int codigoDR;
 		
 		 codigoDR = ReadTypes.leerEntero(scanner, "Ingrese el codigo de detalle de Receta a modificar: ");
 		 detalleReceta = new DetalleReceta(codigoDR);
@@ -116,10 +114,11 @@ public class DetalleRecetaView {
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
 		}
-	}
+	}*/
 	
-}	
+}
 	
+}
 	
 	
 	

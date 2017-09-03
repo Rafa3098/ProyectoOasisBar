@@ -123,4 +123,18 @@ public double StockDisponible(int codigoInsumo) throws Throwable {
 		
 	
 }
+
+
+public void StockUpdate(double d,double c) throws Throwable {
+	
+
+	conexion.SQL("update insumo inner join detallereceta on detallereceta.codigoinsumo=insumo.codigoinsumo inner join trago on trago.codigotrago=detallereceta.codigotrago inner join detalleventa on detalleventa.codigotrago=trago.codigotrago set insumo.stockinsumo=insumo.stockinsumo-(?*?) and insumo.stockinsumo>=(?*?)");
+	conexion.preparedStatement().setDouble(1, d);
+	conexion.preparedStatement().setDouble(2, c);
+	conexion.preparedStatement().setDouble(3,d );
+	conexion.preparedStatement().setDouble(4,c);
+	conexion.CUD();
+	
+
+}
 }

@@ -48,25 +48,16 @@ public class DetalleVentaCtrl implements Control<DetalleVenta>{
 
 	public void insert(DetalleVenta detalleventa) throws Throwable {
   
-		boolean f=true;
-		ArrayList<Trago> tragos;
-	     tragos=tragoCtrl.PreparacionTrago(detalleventa.getCodigoTrago());
-			
-			for (int i = 0; i < tragos.size(); i++) {
-				double a=tragos.get(i).getCantidadinsumo();
-				double c;
-				c=a*detalleventa.getCantidad();
-				if(c>insumoCtrl.StockDisponible(tragos.get(i).getCodigoinsumo())){f=false;}
-			}
+	
 		
-	    if(f==true){
+	   
 		conexion.SQL("Insert into detalleventa(codigodetalleventa,codigotrago,codigoventa,cantidad) VALUES(?,?,?,?)");
 		conexion.preparedStatement().setInt(1, detalleventa.getCodigoDV());
 		conexion.preparedStatement().setInt(2, detalleventa.getCodigoTrago());
 		conexion.preparedStatement().setInt(3, detalleventa.getCodigoVenta());
 		conexion.preparedStatement().setInt(4, detalleventa.getCantidad());
 		conexion.CUD();
-	    }
+	   
 		
 
 	}
@@ -142,12 +133,56 @@ public class DetalleVentaCtrl implements Control<DetalleVenta>{
 			detalleVenta.setCantidad((rs.getInt("cantidad")));
 			
 		}
-		System.out.println("La cantidad es: ");
-		System.out.println(detalleVenta.getCantidad());
+		/*System.out.println("La cantidad es: ");
+		System.out.println(detalleVenta.getCantidad());*/
 		rs.close();
 		return detalleVenta.getCantidad();
 	
 }
 	
+	public boolean StockNecesario(DetalleVenta detalleventa) {
+		boolean f=true;
+		ArrayList<Trago> tragos;
+	     try {
+	    	 tragoCtrl=new TragoCtrl(conexion);
+	    	 insumoCtrl=new InsumoCtrl(conexion);
+			tragos=tragoCtrl.PreparacionTrago(this.CodigoTragoUltimoDetalle(detalleventa));
+			for (int i = 0; i < tragos.size(); i++) {
+				double a=tragos.get(i).getCantidadinsumo();
+				double c;
+				c=a*this.CantidadultimoDetalle(detalleventa);
+				if(c>insumoCtrl.StockDisponible(tragos.get(i).getCodigoinsumo())){f=false;}
+			}
+			
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+			
+			
+		return f;
+	}
 	
+	
+	public void StockUpdate(DetalleVenta detalleventa){
+		ArrayList<Trago> tragos;
+	     try {
+	    	 insumoCtrl = new InsumoCtrl(conexion);
+			tragos=tragoCtrl.PreparacionTrago(this.CodigoTragoUltimoDetalle(detalleventa));
+			for (int i = 0; i < tragos.size(); i++) {
+				double a=tragos.get(i).getCantidadinsumo();
+				double c;
+				c=a*this.CantidadultimoDetalle(detalleventa);
+				insumoCtrl.StockUpdate(insumoCtrl.StockDisponible(tragos.get(i).getCodigoinsumo()),c);
+			}
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+			
+			
+		//if (f==true){insumoCtrl.StockUpdate(cantidadDetalle, cantidadinsumo);}
+	}
 }

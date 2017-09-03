@@ -54,7 +54,7 @@ public class VentaCtrl implements Control<Venta>{
 	
 	public void search(Venta ventas) throws Throwable {
 
-		ResultSet rs;
+		/*ResultSet rs;
 
 		conexion.SQL("select venta.fechaventa,venta.NIT,sum(detalleventa.cantidad*trago.preciounitario) as 'monto' from venta inner join detalleventa on detalleventa.codigoventa =venta.codigoventa inner join trago on trago.codigotrago=detalleventa.codigotrago where NIT=? group by venta.codigoventa");
 		conexion.preparedStatement().setString(1, ventas.getNIT());
@@ -67,11 +67,32 @@ public class VentaCtrl implements Control<Venta>{
 			ventas.setMonto(rs.getDouble("monto"));
 		}
 
-		rs.close();
+		rs.close();*/
 
 	}
+	public ArrayList<Venta> listarVentasPorCliente(String Nit) throws Throwable {
+		ArrayList<Venta> ventas = new ArrayList<Venta>();
+		ResultSet rs;
+		String NIT;
+		Date fechaVenta;
+		int codigoVenta;
+        double monto; 
+        conexion.SQL("select venta.codigoventa,venta.fechaventa,venta.NIT,sum(detalleventa.cantidad*trago.preciounitario) as 'monto' from venta inner join detalleventa on detalleventa.codigoventa =venta.codigoventa inner join trago on trago.codigotrago=detalleventa.codigotrago where NIT=? group by venta.codigoventa");
+		conexion.preparedStatement().setString(1, Nit);
+		rs = conexion.resultSet();
 
+		while (rs.next()) {
+			NIT = rs.getString("NIT");
+			fechaVenta = rs.getDate("fechaVenta");
+			codigoVenta = rs.getInt("codigoVenta");
+			monto=rs.getDouble("monto");
+			ventas.add(new Venta(codigoVenta,fechaVenta,NIT,monto));
+		}
 
+		return ventas;
+
+	}
+    
 	public void update(Venta ventas) throws Throwable {
 		String NIT;
 		Date fechaVenta;

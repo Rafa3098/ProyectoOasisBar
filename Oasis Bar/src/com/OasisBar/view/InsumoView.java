@@ -65,9 +65,8 @@ public class InsumoView {
 		try {
 			insumoCtrl.search(insumo);
 			if((insumo.getNombre()==null) && (insumo.getTipo()==null)){System.out.println("Insumo no registrado");
-			System.out.println("Si desea registrar al Insumo presione 1");
+			System.out.println("Si desea registrar el Insumo presione 1");
 			System.out.println("Si desea ingresar la busqueda nuevamente presione 2");
-			System.out.println("Presione cualquier otro numero para salir");
 			int opcion=ReadTypes.leerEntero(scanner, "Ingrese la opción deseada: ");
 			if(opcion==1){
 			this.insertar();}

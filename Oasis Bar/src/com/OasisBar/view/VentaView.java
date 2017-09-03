@@ -77,37 +77,30 @@ public class VentaView {
 	
 	public void buscar(String NIT) {
 		
-		Venta.setNIT(NIT);
+		/*Venta.setNIT(NIT);
 		try {
 			VentaCtrl.search(Venta);
 			System.out.println(Venta);
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
-		}
+		}*/
 	}
 
-
-
-	/*public void actualizar() {
-		String NIT;
-		
-		NIT = ReadTypes.leerCadena(scanner, "Ingrese el NIT de la Venta a modificar: ");
-		Venta.setNIT(NIT);
-		try {
-			VentaCtrl.search(Venta);
-		} catch (Throwable e1) {
-			System.out.println(e1.getMessage());
-		}
-
-		MenusVenta.menuModificar(scanner, Venta);
+	
+	public void listarPcliente(String NIT) {
+		ArrayList<Venta> Ventas;
 
 		try {
-			VentaCtrl.update(Venta);
+			Ventas = VentaCtrl.listarVentasPorCliente(NIT);
+			for (int i = 0; i < Ventas.size(); i++) {
+				System.out.println(Ventas.get(i));
+			}
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
 		}
-	}*/
-
+		
+		
+	} 
 	public Venta getVenta() {
 		return Venta;
 	}

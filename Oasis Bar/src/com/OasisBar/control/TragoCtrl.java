@@ -11,6 +11,8 @@ import com.OasisBar.entity.Venta;
 public class TragoCtrl implements Control<Trago>{
 	
 	private Conexion conexion;
+	private InsumoCtrl insumoCtrl;
+	private DetalleVentaCtrl detalleventaCtrl;
 	
 	public TragoCtrl (Conexion conexion) {
 		this.conexion = conexion;
@@ -59,6 +61,7 @@ public class TragoCtrl implements Control<Trago>{
 		conexion.preparedStatement().setInt(6, tragos.getCantidadInsumos());
 		
 		conexion.CUD();
+		
 
 	}
 
@@ -106,8 +109,8 @@ public class TragoCtrl implements Control<Trago>{
 			conexion.preparedStatement().setString(2, tragos.getNombre());
 			conexion.preparedStatement().setString(3, tragos.getDescripcion());
 			conexion.preparedStatement().setDouble(4, tragos.getPrecio());
-			conexion.preparedStatement().setInt(5, tragos.getCodigoTrago());
-			conexion.preparedStatement().setInt(6, tragos.getCantidadInsumos());
+			conexion.preparedStatement().setInt(6, tragos.getCodigoTrago());
+			conexion.preparedStatement().setInt(5, tragos.getCantidadInsumos());
 			conexion.CUD();
 		}
 	}
