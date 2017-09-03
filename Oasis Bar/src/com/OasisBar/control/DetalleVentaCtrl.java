@@ -133,25 +133,25 @@ public class DetalleVentaCtrl implements Control<DetalleVenta>{
 			detalleVenta.setCantidad((rs.getInt("cantidad")));
 			
 		}
-		/*System.out.println("La cantidad es: ");
-		System.out.println(detalleVenta.getCantidad());*/
 		rs.close();
 		return detalleVenta.getCantidad();
 	
 }
 	
-	public boolean StockNecesario(DetalleVenta detalleventa) {
+	public boolean StockNecesario(DetalleVenta detalleventa, int codigoTrago, int cantidad) {
 		boolean f=true;
 		ArrayList<Trago> tragos;
 	     try {
 	    	 tragoCtrl=new TragoCtrl(conexion);
 	    	 insumoCtrl=new InsumoCtrl(conexion);
-			tragos=tragoCtrl.PreparacionTrago(this.CodigoTragoUltimoDetalle(detalleventa));
+			tragos=tragoCtrl.PreparacionTrago(codigoTrago/*this.CodigoTragoUltimoDetalle(detalleventa)*/);
 			for (int i = 0; i < tragos.size(); i++) {
 				double a=tragos.get(i).getCantidadinsumo();
 				double c;
-				c=a*this.CantidadultimoDetalle(detalleventa);
-				if(c>insumoCtrl.StockDisponible(tragos.get(i).getCodigoinsumo())){f=false;}
+				c=a*cantidad/*this.CantidadultimoDetalle(detalleventa)*/;
+				if(c>insumoCtrl.StockDisponible(tragos.get(i).getCodigoinsumo())){
+					f=false;
+				}
 			}
 			
 		} catch (Throwable e) {
@@ -172,9 +172,10 @@ public class DetalleVentaCtrl implements Control<DetalleVenta>{
 			tragos=tragoCtrl.PreparacionTrago(this.CodigoTragoUltimoDetalle(detalleventa));
 			for (int i = 0; i < tragos.size(); i++) {
 				double a=tragos.get(i).getCantidadinsumo();
+				int b=tragos.get(i).getCodigoinsumo();
 				double c;
 				c=a*this.CantidadultimoDetalle(detalleventa);
-				insumoCtrl.StockUpdate(insumoCtrl.StockDisponible(tragos.get(i).getCodigoinsumo()),c);
+				insumoCtrl.StockUpdate(a,this.CantidadultimoDetalle(detalleventa),b);
 			}
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block

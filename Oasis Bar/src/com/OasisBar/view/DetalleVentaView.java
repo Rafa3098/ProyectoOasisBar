@@ -61,11 +61,16 @@ public class DetalleVentaView {
 		try {
 			
 			//if (f==true){
-			detalleVentaCtrl.insert(detalleventa);
-			f= detalleVentaCtrl.StockNecesario(detalleventa);
+			//detalleVentaCtrl.insert(detalleventa);
+			f = detalleVentaCtrl.StockNecesario(detalleventa, codigoTrago, cantidad);
 			if (f==true){
-			detalleVentaCtrl.StockUpdate(detalleventa);}
-			else {System.out.println("No alcanza");}
+				detalleVentaCtrl.insert(detalleventa);
+				detalleVentaCtrl.StockUpdate(detalleventa); 
+				System.out.println("Si alcanza");
+			}
+			else {
+				System.out.println("No alcanza");
+			}
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
 		}

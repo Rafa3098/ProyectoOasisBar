@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.OasisBar.control.Conexion;
 import com.OasisBar.entity.Venta;
+import com.OasisBar.view.ClienteView;
 import com.OasisBar.view.DetalleVentaView;
 import com.OasisBar.view.InsumoView;
 import com.OasisBar.view.ReadTypes;
@@ -94,6 +95,7 @@ public class MenusVenta {
 		VentaView vV= new VentaView(conexion,scanner);
 		DetalleVentaView dVV= new DetalleVentaView(conexion,scanner);
         InsumoView CV= new InsumoView(conexion,scanner);
+        ClienteView clientes = new ClienteView(conexion,scanner);
 		while (!salir) {
 			switch (opcionesVenta(scanner)) {
 			case 0:
@@ -111,6 +113,7 @@ public class MenusVenta {
 				break;
 			case 3:
 				System.out.println("Buscador de compras por cliente");
+				clientes.listar();
 				String codigo = ReadTypes.leerCadena(scanner,"Ingrese el NIT del cliente: ");
 				vV.listarPcliente(codigo);;
 				break;

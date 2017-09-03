@@ -120,7 +120,7 @@ public class ClienteView {
 		cliente = new Cliente(NIT);
 		try {
 			clienteCtrl.search(cliente);
-			if(cliente==null){System.out.println("Cliente no registrado");
+			if(cliente.getNombre()==null){System.out.println("Cliente no registrado");
 			System.out.println("Si desea registrar al cliente presione 1");
 			System.out.println("Si desea ingresar el NIT nuevamente presione 2");
 			System.out.println("Presione cualquier otro numero para salir");

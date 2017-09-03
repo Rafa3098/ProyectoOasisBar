@@ -13,7 +13,7 @@ public class Conexion {
 	private static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
 	
 
-	private static final String DB_URL = "jdbc:mariadb://127.0.0.1/oasis' bar";
+	private static final String DB_URL = "jdbc:mariadb://127.0.0.1/oasi's bar actualizado";
 
 	public Conexion() {
 
